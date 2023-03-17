@@ -68,7 +68,7 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="650.0" prefHeight="655.0" prefWidth="736.0">
                            <children>
-                              <Label layoutX="59.0" layoutY="75.0" style="-fx-font-weight: bold;" text="Personopplysninger" />
+                              <Label fx:id="personDetailsLabel" layoutX="59.0" layoutY="75.0" style="-fx-font-weight: bold;" />
                               <GridPane layoutX="21.0" layoutY="49.0" style="-fx-background-color: h;" vgap="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="-11.0" AnchorPane.topAnchor="100.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.50787353515625" minWidth="180.0" prefWidth="184.98870849609375" />
@@ -83,18 +83,18 @@
                                     <RowConstraints maxHeight="42.333343505859375" minHeight="10.0" prefHeight="38.00001017252603" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Fornavn:" />
-                                    <Label text="Etternavn:" GridPane.rowIndex="1" />
-                                    <Label text="E-mail:" GridPane.rowIndex="2" />
-                                    <Label text="Fødselsdato:" GridPane.rowIndex="3" />
-                                    <Label text="Alder:" GridPane.rowIndex="4" />
-                                    <Label text="Adresse:" GridPane.rowIndex="5" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="Label" GridPane.columnIndex="1" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="firstNameLabel" />
+                                    <Label fx:id="lastNameLabel" GridPane.rowIndex="1" />
+                                    <Label fx:id="emaiLabel" GridPane.rowIndex="2" />
+                                    <Label fx:id="birthLabel" GridPane.rowIndex="3" />
+                                    <Label fx:id="ageLabel" GridPane.rowIndex="4" />
+                                    <Label fx:id="adressLabel" GridPane.rowIndex="5" />
+                                    <Label fx:id="lastNameInfo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="firstNameInfo" GridPane.columnIndex="1" />
+                                    <Label fx:id="emailInfo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="birthInfo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="adressInfo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="ageInfo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                  </children>
                                  <padding>
                                     <Insets top="50.0" />

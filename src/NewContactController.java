@@ -8,26 +8,13 @@ import javafx.stage.Stage;
 
 public class NewContactController {
 
-    @FXML
-    private Button cancelBtn;
-
-    @FXML
-    private Button addBtn;
-
-    @FXML
-    private TextField firstNameTextField;
-
-    @FXML
-    private TextField lastNameTextField;
-
-    @FXML
-    private TextField emailTextField;
-
-    @FXML
-    private TextField birthTextField;
-
-    @FXML
-    private TextField addressTextField;
+    @FXML private Button cancelBtn;
+    @FXML private Button addBtn;
+    @FXML private TextField firstNameTextField;
+    @FXML private TextField lastNameTextField;
+    @FXML private TextField emailTextField;
+    @FXML private TextField birthTextField;
+    @FXML private TextField addressTextField;
 
     private MainController mainController;
 

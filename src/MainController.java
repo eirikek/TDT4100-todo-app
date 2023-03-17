@@ -22,23 +22,29 @@ import javafx.stage.Stage;
 
 public class MainController implements Initializable {
 
-    @FXML
-    private Label numOfContactsLabel;
+    @FXML private Label numOfContactsLabel;
+    @FXML private TableView<Contact> tableView;
+    @FXML private TableColumn<Contact, String> firstNameColumn;
+    @FXML private TableColumn<Contact, String> lastNameColumn;
+    @FXML private Label firstNameInfo;
+    @FXML private Label lastNameInfo;
+    @FXML private Label emailInfo;
+    @FXML private Label birthInfo;
+    @FXML private Label ageInfo;
+    @FXML private Label adressInfo;
+    @FXML private Label personDetailsLabel;
+    @FXML private Label firstNameLabel;
+    @FXML private Label lastNameLabel;
+    @FXML private Label emaiLabel; 
+    @FXML private Label birthLabel; 
+    @FXML private Label ageLabel;
+    @FXML private Label adressLabel;
 
-    @FXML
-    private TableView<Contact> tableView;
-
-    @FXML
-    private TableColumn<Contact, String> firstNameColumn;
-
-    @FXML
-    private TableColumn<Contact, String> lastNameColumn;
-
-    private ObservableList<Contact> contacts = FXCollections.observableArrayList(new Contact("fefef", "fefef", "fefef", "fefef", "fefef"));
+    private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
     // Åpne skjema for legge til ny kontakt
     public void newBtnClicked(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewContact.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/NewContact.fxml"));
         Parent root = fxmlLoader.load();
         NewContactController newContactController = fxmlLoader.getController();
         newContactController.setMainController(this);
@@ -50,7 +56,7 @@ public class MainController implements Initializable {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        String css = this.getClass().getResource("style.css").toExternalForm();
+        String css = this.getClass().getResource("resources/style.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.showAndWait();
     }
@@ -58,7 +64,7 @@ public class MainController implements Initializable {
     //Legge til kontakt
     public void addNewContact(Contact contact) {
         contacts.add(contact);
-        numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
+        tableView.getSelectionModel().select(contact);
     }
 
     //Slette kontakt
@@ -73,14 +79,48 @@ public class MainController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == deleteBtn) {
             contacts.remove(selectedContact);
+            showDetails(tableView.getSelectionModel().getSelectedItem());
         }
         numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
     }
+
+    public void showDetails(Contact contact) {
+        firstNameInfo.setText(contact.getFirstName());
+        lastNameInfo.setText(contact.getLastName());
+        emailInfo.setText(contact.getEmail());
+        birthInfo.setText(contact.getBirth());
+        adressInfo.setText(contact.getAddress());
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         firstNameColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getLastName()));
         tableView.setItems(contacts);
+
+        // Vise persondetaljer når valgt kontakt i tableview
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (contacts.size() == 0) {
+                showDetails(new Contact("", "", "", "", ""));
+                personDetailsLabel.setText("");
+                firstNameLabel.setText("");
+                lastNameLabel.setText("");
+                emaiLabel.setText("");
+                birthLabel.setText("");
+                ageLabel.setText("");
+                adressLabel.setText("");
+                numOfContactsLabel.setText("Antall kontakter: 0");
+            }
+            showDetails(newSelection);
+            numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
+            personDetailsLabel.setText("Personopplysninger");
+            firstNameLabel.setText("Fornavn:");
+            lastNameLabel.setText("Etternavn:");
+            emaiLabel.setText("E-post:");
+            birthLabel.setText("Fødselsdato:");
+            ageLabel.setText("Alder:");
+            adressLabel.setText("Adresse:");
+        });
     }
 
 }

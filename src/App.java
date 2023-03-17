@@ -9,12 +9,12 @@ public class App extends Application {
    @Override 
    public void start(Stage stage) throws Exception {
       try {
-         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/Main.fxml"));
          Parent root = fxmlLoader.load();
          Scene scene = new Scene(root);
          stage.setScene(scene);
          
-         String css = this.getClass().getResource("style.css").toExternalForm();
+         String css = this.getClass().getResource("resources/style.css").toExternalForm();
          scene.getStylesheets().add(css);
          stage.setTitle("Kontaktliste");
          stage.show();
