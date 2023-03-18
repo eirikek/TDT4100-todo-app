@@ -6,15 +6,23 @@ import javafx.scene.control.Alert.AlertType;
 
 public abstract class Forms {
 
-    public boolean isValidText(String textField) {
+    public boolean isValidName(String textField) {
         if (textField.isBlank() || textField == null) {
-            return true;
+            return false;
         }
         return textField.matches("[a-zA-Z]+");
     }
 
-    public boolean isValidEmail(String emailTextField) {
-        if (emailTextField.isBlank() || emailTextField == null) {
+    public boolean isValidAdress(String textField) {
+        if (textField.isBlank() || textField == null) {
+            return true;
+        } else {
+            return textField.matches("[a-zA-Z]+");
+        }
+    }
+
+    public boolean isValidEmail(String textField) {
+        if (textField.isBlank() || textField == null) {
             return true;
         }
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
@@ -23,7 +31,7 @@ public abstract class Forms {
                             "A-Z]{2,7}$";
                               
         Pattern pat = Pattern.compile(emailRegex);
-        return pat.matcher(emailTextField).matches();
+        return pat.matcher(textField).matches();
     }
 
     public boolean isValidBirth(LocalDate birthDatePicker) {
@@ -43,14 +51,14 @@ public abstract class Forms {
     }
 
     public boolean validInputs(String firstName, String lastName, String email, LocalDate birth, String adress) {
-        return isValidText(firstName) && isValidText(lastName) && isValidEmail(email) && isValidBirth(birth) && isValidText(adress);
+        return isValidName(firstName) && isValidName(lastName) && isValidEmail(email) && isValidBirth(birth) && isValidAdress(adress);
     }
 
     public void createAlertBox(String firstName, String lastName, String email, LocalDate birth, String adress) {
-        if (!isValidText(firstName)) {
+        if (!isValidName(firstName)) {
             invalidAlert("fornavn");
         }
-        if (!isValidText(lastName)) {
+        if (!isValidName(lastName)) {
             invalidAlert("etternavn");
         }
         if (!isValidEmail(email)) {
@@ -59,7 +67,7 @@ public abstract class Forms {
         if (!isValidBirth(birth)) {
             invalidAlert("fødselsdato");
         }
-        if (!isValidText(adress)) {
+        if (!isValidAdress(adress)) {
             invalidAlert("adresse");
         }
     }

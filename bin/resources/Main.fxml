@@ -53,7 +53,7 @@
                <children>
                   <SplitPane id="contactsDetailsContainer" dividerPositions="0.4" prefHeight="600.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="450.0" prefHeight="581.0" prefWidth="476.0">
+                      <AnchorPane minHeight="0.0" minWidth="500.0" prefHeight="581.0" prefWidth="476.0">
                            <children>
                               <TableView fx:id="tableView" layoutY="68.0" prefHeight="587.0" prefWidth="476.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="68.0">
                                 <columns>

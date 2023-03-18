@@ -39,11 +39,12 @@ public class NewContactController extends Forms{
         if (!validInputs(firstname, lastName, email, birth, adress)) {
             createAlertBox(firstname, lastName, email, birth, adress);
         } else {
-            Contact contact = new Contact(firstname.substring(0, 1).toUpperCase() + firstname.substring(1),
-                                        lastName.substring(0, 1).toUpperCase() + lastName.substring(1), 
-                                        email, 
-                                        birth, 
-                                        adress.substring(0, 1).toUpperCase() + adress.substring(1));
+            //Gjør første bokstav uppercase
+            firstname = firstname.substring(0, 1).toUpperCase() + firstname.substring(1);
+            lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+            if (!(adress == null || adress.isBlank())) adress = adress.substring(0, 1).toUpperCase() + adress.substring(1);
+
+            Contact contact = new Contact(firstname, lastName, email, birth, adress);
             mainController.addNewContact(contact);
 
             Stage stage = (Stage) addBtn.getScene().getWindow();
