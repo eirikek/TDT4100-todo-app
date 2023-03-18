@@ -1,14 +1,18 @@
+import java.time.LocalDate;
+import java.time.Period;
+
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Contact {
-    private SimpleStringProperty firstName, lastName, email, birth, address;
-    private int age;
+    private SimpleStringProperty firstName, lastName, email, address;
+    private SimpleObjectProperty<LocalDate> birth;
 
-    public Contact(String firstName, String lastName, String email, String birth, String address) {
+    public Contact(String firstName, String lastName, String email, LocalDate birth, String address) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.email = new SimpleStringProperty(email);
-        this.birth = new SimpleStringProperty(birth);
+        this.birth = new SimpleObjectProperty<LocalDate>(birth);
         this.address = new SimpleStringProperty(address);
     }
 
@@ -24,16 +28,12 @@ public class Contact {
         return email.get();
     }
 
-    public String getBirth() {
+    public LocalDate getBirth() {
         return birth.get();
     }
 
     public String getAddress() {
         return address.get();
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public void setFirstName(String firstName) {
@@ -48,17 +48,16 @@ public class Contact {
         this.email = new SimpleStringProperty(email);
     }
 
-    public void setBirth(String birth) {
-        this.birth = new SimpleStringProperty(birth);
+    public void setBirth(LocalDate birth) {
+        this.birth = new SimpleObjectProperty<LocalDate>(birth);
     }
 
     public void setAddress(String address) {
         this.address = new SimpleStringProperty(address);
     }
 
-    private Integer calculateAge(Integer age) {
-        return age;
+    public int calculateAge(LocalDate date) {
+        LocalDate now = LocalDate.now();
+        return Period.between(date, now).getYears();
     }
-
-    
 }

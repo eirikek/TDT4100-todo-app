@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -73,23 +74,35 @@ public class MainController implements Initializable {
         ButtonType deleteBtn = new ButtonType("Slett", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelDeleteBtn = new ButtonType("Avbryt", ButtonBar.ButtonData.CANCEL_CLOSE);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Er du sikker på at du vil slette " + selectedContact.getFirstName() + " " + selectedContact.getLastName() + " fra kontaktlisten?", cancelDeleteBtn, deleteBtn);
+        
         alert.setTitle("Slett kontakt");
         alert.setHeaderText("Slette " + selectedContact.getFirstName() + " " + selectedContact.getLastName());
         alert.initModality(Modality.APPLICATION_MODAL);
         Optional<ButtonType> result = alert.showAndWait();
+
         if (result.get() == deleteBtn) {
             contacts.remove(selectedContact);
-            showDetails(tableView.getSelectionModel().getSelectedItem());
+            if (contacts.size() != 0) {
+                showDetails(tableView.getSelectionModel().getSelectedItem());
+                numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
+            }
         }
-        numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
     }
 
+
+    //Vise personopplysninger
     public void showDetails(Contact contact) {
         firstNameInfo.setText(contact.getFirstName());
         lastNameInfo.setText(contact.getLastName());
         emailInfo.setText(contact.getEmail());
-        birthInfo.setText(contact.getBirth());
         adressInfo.setText(contact.getAddress());
+        if (contact.getBirth() != null) {
+            birthInfo.setText(contact.getBirth().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
+            ageInfo.setText(String.valueOf(contact.calculateAge(contact.getBirth())));
+        } else {
+            birthInfo.setText("");
+            ageInfo.setText("");
+        }
     }
 
     @Override
@@ -101,7 +114,13 @@ public class MainController implements Initializable {
         // Vise persondetaljer når valgt kontakt i tableview
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (contacts.size() == 0) {
-                showDetails(new Contact("", "", "", "", ""));
+                firstNameInfo.setText("");
+                lastNameInfo.setText("");
+                emailInfo.setText("");
+                birthInfo.setText("");
+                adressInfo.setText("");
+                ageInfo.setText("");
+
                 personDetailsLabel.setText("");
                 firstNameLabel.setText("");
                 lastNameLabel.setText("");
@@ -109,17 +128,19 @@ public class MainController implements Initializable {
                 birthLabel.setText("");
                 ageLabel.setText("");
                 adressLabel.setText("");
+
                 numOfContactsLabel.setText("Antall kontakter: 0");
+            } else {
+                showDetails(newSelection);
+                numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
+                personDetailsLabel.setText("Personopplysninger");
+                firstNameLabel.setText("Fornavn:");
+                lastNameLabel.setText("Etternavn:");
+                emaiLabel.setText("E-post:");
+                birthLabel.setText("Fødselsdato:");
+                ageLabel.setText("Alder:");
+                adressLabel.setText("Adresse:");
             }
-            showDetails(newSelection);
-            numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
-            personDetailsLabel.setText("Personopplysninger");
-            firstNameLabel.setText("Fornavn:");
-            lastNameLabel.setText("Etternavn:");
-            emaiLabel.setText("E-post:");
-            birthLabel.setText("Fødselsdato:");
-            ageLabel.setText("Alder:");
-            adressLabel.setText("Adresse:");
         });
     }
 
