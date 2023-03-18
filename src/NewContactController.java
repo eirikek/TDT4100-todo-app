@@ -39,7 +39,11 @@ public class NewContactController extends Forms{
         if (!validInputs(firstname, lastName, email, birth, adress)) {
             createAlertBox(firstname, lastName, email, birth, adress);
         } else {
-            Contact contact = new Contact(firstname, lastName, email, birth, adress);
+            Contact contact = new Contact(firstname.substring(0, 1).toUpperCase() + firstname.substring(1),
+                                        lastName.substring(0, 1).toUpperCase() + lastName.substring(1), 
+                                        email, 
+                                        birth, 
+                                        adress.substring(0, 1).toUpperCase() + adress.substring(1));
             mainController.addNewContact(contact);
 
             Stage stage = (Stage) addBtn.getScene().getWindow();

@@ -65,11 +65,11 @@ public class EditContactController extends Forms{
         if (!validInputs(firstname, lastName, email, birth, adress)) {
             createAlertBox(firstname, lastName, email, birth, adress);
         } else {
-            selectedContact.setFirstName(firstNameTextField.getText());
-            selectedContact.setLastName(lastNameTextField.getText());
-            selectedContact.setEmail(emailTextField.getText());
-            selectedContact.setBirth(birthDatePicker.getValue());
-            selectedContact.setAddress(addressTextField.getText());
+            selectedContact.setFirstName(firstname.substring(0, 1).toUpperCase() + firstname.substring(1));
+            selectedContact.setLastName(lastName.substring(0, 1).toUpperCase() + lastName.substring(1));
+            selectedContact.setEmail(email);
+            selectedContact.setBirth(birth);
+            selectedContact.setAddress(adress.substring(0, 1).toUpperCase() + adress.substring(1));
             if (birth != null) {
                 selectedContact.setAge();
             }
