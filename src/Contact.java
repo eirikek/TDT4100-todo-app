@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Contact {
     private SimpleStringProperty firstName, lastName, email, address;
     private SimpleObjectProperty<LocalDate> birth;
+    private int age;
 
     public Contact(String firstName, String lastName, String email, LocalDate birth, String address) {
         this.firstName = new SimpleStringProperty(firstName);
@@ -14,6 +15,9 @@ public class Contact {
         this.email = new SimpleStringProperty(email);
         this.birth = new SimpleObjectProperty<LocalDate>(birth);
         this.address = new SimpleStringProperty(address);
+        if (birth != null) {
+            this.age = calculateAge(birth);
+        }
     }
 
     public String getFirstName() {
@@ -34,6 +38,14 @@ public class Contact {
 
     public String getAddress() {
         return address.get();
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge() {
+        this.age = calculateAge(this.getBirth());
     }
 
     public void setFirstName(String firstName) {
@@ -60,4 +72,5 @@ public class Contact {
         LocalDate now = LocalDate.now();
         return Period.between(date, now).getYears();
     }
+
 }

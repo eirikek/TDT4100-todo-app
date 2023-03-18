@@ -43,6 +43,10 @@ public class MainController implements Initializable {
 
     private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
+    public TableView<Contact> getTableView() {
+        return tableView;
+    }
+
     // Åpne skjema for legge til ny kontakt
     public void newBtnClicked(ActionEvent e) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/NewContact.fxml"));
@@ -52,7 +56,7 @@ public class MainController implements Initializable {
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Add new contact");
+        stage.setTitle("Legg til kontakt");
         stage.setResizable(false);
 
         Scene scene = new Scene(root);
@@ -62,10 +66,32 @@ public class MainController implements Initializable {
         stage.showAndWait();
     }
 
-    //Legge til kontakt
-    public void addNewContact(Contact contact) {
-        contacts.add(contact);
-        tableView.getSelectionModel().select(contact);
+     // Åpne skjema for å endre kontakt
+     public void editBtnClicked(ActionEvent e) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/EditContact.fxml"));
+        Parent root = fxmlLoader.load();
+        EditContactController editContactController = fxmlLoader.getController();
+        editContactController.setMainController(this);
+
+        Contact selectedContact = tableView.getSelectionModel().getSelectedItem();
+        editContactController.setSelectedContact(selectedContact);
+
+        editContactController.getFirstNameTextField().setText(selectedContact.getFirstName());
+        editContactController.getLastNameTextField().setText(selectedContact.getLastName());
+        editContactController.getEmailTextField().setText(selectedContact.getEmail());
+        editContactController.getBirthDatePicker().setValue(selectedContact.getBirth());
+        editContactController.getAddressTextField().setText(selectedContact.getAddress());
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Endre kontakt");
+        stage.setResizable(false);
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        String css = this.getClass().getResource("resources/style.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        stage.showAndWait();
     }
 
     //Slette kontakt
@@ -89,6 +115,11 @@ public class MainController implements Initializable {
         }
     }
 
+     //Legge til kontakt
+     public void addNewContact(Contact contact) {
+        contacts.add(contact);
+        tableView.getSelectionModel().select(contact);
+    }
 
     //Vise personopplysninger
     public void showDetails(Contact contact) {
@@ -97,8 +128,8 @@ public class MainController implements Initializable {
         emailInfo.setText(contact.getEmail());
         adressInfo.setText(contact.getAddress());
         if (contact.getBirth() != null) {
-            birthInfo.setText(contact.getBirth().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
-            ageInfo.setText(String.valueOf(contact.calculateAge(contact.getBirth())));
+            birthInfo.setText(contact.getBirth().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            ageInfo.setText(String.valueOf(contact.getAge()));
         } else {
             birthInfo.setText("");
             ageInfo.setText("");
@@ -113,6 +144,7 @@ public class MainController implements Initializable {
 
         // Vise persondetaljer når valgt kontakt i tableview
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            //Skal ikke vise persondetaljer hvis kontaktlisten er tom
             if (contacts.size() == 0) {
                 firstNameInfo.setText("");
                 lastNameInfo.setText("");
