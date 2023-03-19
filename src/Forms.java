@@ -10,14 +10,14 @@ public abstract class Forms {
         if (textField.isBlank() || textField == null) {
             return false;
         }
-        return textField.matches("[a-zA-Z]+");
+        return textField.matches("[a-zA-ZæøåÆØÅ]+");
     }
 
     public boolean isValidAdress(String textField) {
         if (textField.isBlank() || textField == null) {
             return true;
         } else {
-            return textField.matches("[a-zA-Z]+");
+            return textField.matches(("[a-zA-ZæøåÆØÅ\\s0-9]*"));
         }
     }
 

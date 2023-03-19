@@ -141,6 +141,7 @@ public class MainController implements Initializable {
         firstNameColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getLastName()));
         tableView.setItems(contacts);
+        tableView.setPlaceholder(new Label("Ingen kontakter"));
 
         // Vise persondetaljer når valgt kontakt i tableview
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
