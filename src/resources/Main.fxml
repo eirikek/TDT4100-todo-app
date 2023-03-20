@@ -109,7 +109,7 @@
                   </SplitPane>
                </children>
             </AnchorPane>
-            <ButtonBar layoutX="816.0" layoutY="698.0" prefHeight="63.0" prefWidth="390.0">
+            <ButtonBar layoutX="816.0" layoutY="684.0" prefHeight="114.0" prefWidth="390.0">
               <buttons>
                 <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#newBtnClicked" prefHeight="26.0" prefWidth="121.0" text="Ny" />
                   <Button mnemonicParsing="false" onAction="#editBtnClicked" text="Rediger" />
