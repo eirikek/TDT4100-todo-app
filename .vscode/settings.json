@@ -18,6 +18,14 @@
         "/Users/eirikekv/Downloads/javafx-sdk-19.0.2.1/lib/javafx.graphics.jar",
         "/Users/eirikekv/Downloads/javafx-sdk-19.0.2.1/lib/javafx.media.jar",
         "/Users/eirikekv/Downloads/javafx-sdk-19.0.2.1/lib/javafx.swing.jar",
-        "/Users/eirikekv/Downloads/javafx-sdk-19.0.2.1/lib/javafx.web.jar"
+        "/Users/eirikekv/Downloads/javafx-sdk-19.0.2.1/lib/javafx.web.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.base.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.controls.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.fxml.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.graphics.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.media.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.swing.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.web.jar",
+        "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar"
     ]
 }
