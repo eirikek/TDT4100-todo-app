@@ -81,7 +81,7 @@
             </GridPane>
             <ButtonBar layoutX="143.0" layoutY="324.0" prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelChanges" prefHeight="26.0" prefWidth="113.0" text="Avbryt" />
+                <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="113.0" text="Avbryt" />
                   <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveChanges" text="Lagre" />
               </buttons>
             </ButtonBar>

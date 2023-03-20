@@ -8,7 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class NewContactController extends Forms{
+public class NewContactController extends FormValidation implements FormInterface{
 
     @FXML private Button cancelBtn;
     @FXML private Button addBtn;
@@ -20,11 +20,31 @@ public class NewContactController extends Forms{
 
     private MainController mainController;
 
+    public TextField getFirstNameTextField() {
+        return firstNameTextField;
+    }
+
+    public TextField getLastNameTextField() {
+        return lastNameTextField;
+    }
+
+    public TextField getEmailTextField() {
+        return emailTextField;
+    }
+
+    public DatePicker getBirthDatePicker() {
+        return birthDatePicker;
+    }
+
+    public TextField getAddressTextField() {
+        return addressTextField;
+    }
+
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
-    public void cancelNewContact(ActionEvent e) {
+    public void cancel(ActionEvent e) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }

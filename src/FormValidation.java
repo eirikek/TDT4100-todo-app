@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public abstract class Forms {
+public abstract class FormValidation {
 
     public boolean isValidName(String textField) {
         if (textField.isBlank() || textField == null) {

@@ -9,7 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditContactController extends Forms{
+public class EditContactController extends FormValidation implements FormInterface{
     @FXML private Button saveBtn;
     @FXML private Button cancelBtn;
     @FXML private TextField firstNameTextField;
@@ -49,7 +49,7 @@ public class EditContactController extends Forms{
         this.selectedContact = selectedContact;
     }
 
-    public void cancelChanges(ActionEvent e) {
+    public void cancel(ActionEvent e) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
