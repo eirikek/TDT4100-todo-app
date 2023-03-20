@@ -1,4 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -45,6 +48,16 @@ public class MainController implements Initializable {
 
     public TableView<Contact> getTableView() {
         return tableView;
+    }
+
+    //Lagre kontakter i fil
+    public void writeContactToFile() throws IOException {
+        PrintWriter writer = new PrintWriter("src/resources/contacts.txt");
+        for (Contact contact : contacts) {
+        writer.println(contact.getFirstName() + "," + contact.getLastName() + "," + contact.getEmail() + "," + contact.getBirth() + "," + contact.getAddress());
+        }
+        writer.flush();
+        writer.close();
     }
 
     // Åpne skjema for legge til ny kontakt
@@ -116,9 +129,10 @@ public class MainController implements Initializable {
     }
 
      //Legge til kontakt
-     public void addNewContact(Contact contact) {
+     public void addNewContact(Contact contact) throws IOException {
         contacts.add(contact);
         tableView.getSelectionModel().select(contact);
+        writeContactToFile();
     }
 
     //Vise personopplysninger
@@ -176,5 +190,4 @@ public class MainController implements Initializable {
             }
         });
     }
-
 }
