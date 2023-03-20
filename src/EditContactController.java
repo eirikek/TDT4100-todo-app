@@ -80,6 +80,7 @@ public class EditContactController extends FormValidation implements FormInterfa
             }
             tableView.refresh();
             mainController.showDetails(selectedContact);
+            mainController.writeContactToFile("src/resources/contacts.txt");
 
             Stage stage = (Stage) saveBtn.getScene().getWindow();
             stage.close();

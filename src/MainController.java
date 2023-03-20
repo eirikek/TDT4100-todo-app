@@ -1,11 +1,15 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class MainController implements Initializable {
+public class MainController implements Initializable{
 
     @FXML private Label numOfContactsLabel;
     @FXML private TableView<Contact> tableView;
@@ -50,14 +54,46 @@ public class MainController implements Initializable {
         return tableView;
     }
 
-    //Lagre kontakter i fil
-    public void writeContactToFile() throws IOException {
-        PrintWriter writer = new PrintWriter("src/resources/contacts.txt");
+    //Skrive kontaktlisten til fil
+    public void writeContactToFile(String filename) throws IOException {
+        PrintWriter writer = new PrintWriter(filename);
         for (Contact contact : contacts) {
         writer.println(contact.getFirstName() + "," + contact.getLastName() + "," + contact.getEmail() + "," + contact.getBirth() + "," + contact.getAddress());
         }
         writer.flush();
         writer.close();
+    }
+
+    //Lese kontakter fra fil
+    public void getContactsFromFile(String filename) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(filename));
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] lineInfo = line.split(",");
+            LocalDate birth;
+            String adress = "";
+
+            String firstName = lineInfo[0];
+            String lastName = lineInfo[1];
+            String email = lineInfo[2];
+            String birthValue = lineInfo[3];
+            if (birthValue.equals("null")) {
+                birth = null;
+            } else {
+                birth = LocalDate.parse(birthValue);
+            }
+            if (lineInfo.length == 5) {
+                adress = lineInfo[4];
+            }
+
+            Contact contact = new Contact(firstName, lastName, email, birth, adress);
+            try {
+                addNewContact(contact);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        scanner.close();
     }
 
     // Åpne skjema for legge til ny kontakt
@@ -108,7 +144,7 @@ public class MainController implements Initializable {
     }
 
     //Slette kontakt
-    public void deleteContact() {
+    public void deleteContact() throws IOException {
         Contact selectedContact = tableView.getSelectionModel().getSelectedItem();
         ButtonType deleteBtn = new ButtonType("Slett", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelDeleteBtn = new ButtonType("Avbryt", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -121,6 +157,7 @@ public class MainController implements Initializable {
 
         if (result.get() == deleteBtn) {
             contacts.remove(selectedContact);
+            writeContactToFile("src/resources/contacts.txt");
             if (contacts.size() != 0) {
                 showDetails(tableView.getSelectionModel().getSelectedItem());
                 numOfContactsLabel.setText("Antall kontakter: " + contacts.size());
@@ -132,7 +169,7 @@ public class MainController implements Initializable {
      public void addNewContact(Contact contact) throws IOException {
         contacts.add(contact);
         tableView.getSelectionModel().select(contact);
-        writeContactToFile();
+        writeContactToFile("src/resources/contacts.txt");
     }
 
     //Vise personopplysninger
@@ -154,6 +191,14 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         firstNameColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getLastName()));
+
+        //Henter kontakter fra fil slik at de allerede er i listen når man starter applikasjonen
+        try {
+            getContactsFromFile("src/resources/contacts.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         tableView.setItems(contacts);
         tableView.setPlaceholder(new Label("Ingen kontakter"));
 
