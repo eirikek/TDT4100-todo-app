@@ -109,14 +109,14 @@
                   </SplitPane>
                </children>
             </AnchorPane>
-            <ButtonBar layoutX="816.0" layoutY="684.0" prefHeight="114.0" prefWidth="390.0">
+            <ButtonBar layoutX="813.0" layoutY="693.0" prefHeight="39.0" prefWidth="390.0">
               <buttons>
                 <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#newBtnClicked" prefHeight="26.0" prefWidth="121.0" text="Ny" />
                   <Button mnemonicParsing="false" onAction="#editBtnClicked" text="Rediger" />
                   <Button mnemonicParsing="false" onAction="#deleteContact" text="Slett" />
               </buttons>
             </ButtonBar>
-            <Label fx:id="numOfContactsLabel" layoutX="45.0" layoutY="713.0" prefHeight="19.0" prefWidth="321.0" text="Antall kontakter: 0" />
+            <Label fx:id="numOfContactsLabel" layoutX="42.0" layoutY="693.0" prefHeight="19.0" prefWidth="321.0" text="Antall kontakter: 0" />
       </children>
     </AnchorPane>
   </children>
