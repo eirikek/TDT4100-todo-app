@@ -8,7 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditContactController extends FormValidation implements FormInterface{
+public class EditContactController extends Form implements Controller{
     @FXML private Button saveBtn;
     @FXML private Button cancelBtn;
     @FXML private TextField firstNameTextField;

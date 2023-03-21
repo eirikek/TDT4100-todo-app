@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import org.junit.Test;
 
-public class NameValidationTest extends FormValidation{
+public class NameValidationTest extends Form{
 
     Contact Contact = new Contact("","Nordmann", null, null, null);
     private boolean ExpectedValue = isValidName(Contact.getFirstName()); // Lager en boolean som returnerer en True eller False verdi, basert på hvorvidt navnet er gyldig
