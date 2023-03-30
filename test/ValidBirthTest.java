@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class ValidBirthTest {
 
-    private FormValidation formValidation;
+    private Form  Form ;
 
     @Before
     public void setUp() {
-        formValidation = new FormValidation() {};
+        Form  = new Form () {};
     }
 
     @Test
@@ -21,9 +21,9 @@ public class ValidBirthTest {
         LocalDate yesterday = today.minusDays(1);
         LocalDate tomorrow = today.plusDays(1);
 
-        assertTrue(formValidation.isValidBirth(yesterday));
-        assertFalse(formValidation.isValidBirth(today));
-        assertFalse(formValidation.isValidBirth(tomorrow));
-        assertTrue(formValidation.isValidBirth(null));
+        assertTrue(Form .isValidBirth(yesterday));
+        assertFalse(Form .isValidBirth(today));
+        assertFalse(Form .isValidBirth(tomorrow));
+        assertTrue(Form .isValidBirth(null));
     }
 }
