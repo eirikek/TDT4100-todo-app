@@ -8,7 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class NewContactController extends FormValidation implements FormInterface{
+public class NewContactController extends Form implements Controller{
 
     @FXML private Button cancelBtn;
     @FXML private Button addBtn;

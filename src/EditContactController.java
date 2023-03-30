@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.time.LocalDate;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditContactController extends FormValidation implements FormInterface{
+public class EditContactController extends Form implements Controller{
     @FXML private Button saveBtn;
     @FXML private Button cancelBtn;
     @FXML private TextField firstNameTextField;
@@ -80,6 +79,7 @@ public class EditContactController extends FormValidation implements FormInterfa
             }
             tableView.refresh();
             mainController.showDetails(selectedContact);
+            mainController.writeContactToFile("src/resources/contacts.txt");
 
             Stage stage = (Stage) saveBtn.getScene().getWindow();
             stage.close();

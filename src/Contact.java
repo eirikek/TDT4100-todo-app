@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.Period;
-
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
