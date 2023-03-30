@@ -4,7 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "type": "java",
+            "name": "BirthValidationTest",
+            "request": "launch",
+            "mainClass": "BirthValidationTest",
+            "projectName": "New-Beginning_33132825"
+        },
         {
             "type": "java",
             "name": "App",

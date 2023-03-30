@@ -30,5 +30,6 @@
         "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.swing.jar",
         "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx.web.jar",
         "c:\\Users\\fhans\\Desktop\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
