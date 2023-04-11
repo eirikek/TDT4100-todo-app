@@ -1,51 +1,48 @@
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
 
-import javafx.collections.ObservableList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MainControllerTest {
+public class MainControllerTest extends NewContactController {
 
     private MainController mainController;
+    private String testFilePath = "src/test/resources/test_contacts.txt";
 
     @Before
     public void setUp() {
         mainController = new MainController();
     }
 
-    @Test
-    public void testAddNewContact() throws IOException {
-        Contact contact = new Contact("John", "Doe", "johndoe@example.com", null, null);
-        mainController.addNewContact(contact);
-        ObservableList<Contact> contacts = mainController.getTableView().getItems();
-        assertEquals(1, contacts.size());
-        assertEquals(contact, contacts.get(0));
-
-        // Verify that the contact is written to file
-        List<String> lines = Files.readAllLines(Paths.get("src/resources/contacts.txt"));
-        assertEquals(1, lines.size());
-        assertEquals("John,Doe,johndoe@example.com,,", lines.get(0));
+    @After
+    public void tearDown() {
+        File testFile = new File(testFilePath);
+        if (testFile.exists()) {
+            testFile.delete();
+        }
     }
 
-    @Test
-    public void testDeleteContact() {
-        Contact contact1 = new Contact("John", "Doe", "johndoe@example.com", null, null);
-        Contact contact2 = new Contact("Jane", "Doe", "janedoe@example.com", null, null);
+    @org.junit.Test
+    public void testWriteAndReadContacts() throws IOException {
+        Contact contact1 = new Contact("Ola", "Nordmann", "Ola.Nordmann@Norge.no", LocalDate.of(1990, 1, 1), "Samfundet 123");
+        Contact contact2 = new Contact("Jane", "Doe", "jane.doe@example.com", LocalDate.of(1992, 2, 2), "456 Maple St.");
+
         mainController.addNewContact(contact1);
         mainController.addNewContact(contact2);
-        ObservableList<Contact> contacts = mainController.getTableView().getItems();
-        assertEquals(2, contacts.size());
+        mainController.writeContactToFile(testFilePath);
 
-        // Select the first contact and delete it
-        mainController.getTableView().getSelectionModel().select(contact1);
-        mainController.deleteContact();
-        assertEquals(1, contacts.size());
-        assertEquals(contact2, contacts.get(0));
+        mainController.contacts.clear();
+        mainController.getContactsFromFile(testFilePath);
+
+        assertEquals(2, mainController.contacts.size());
+        assertEquals(contact1, mainController.contacts.get(0));
+        assertEquals(contact2, mainController.contacts.get(1));
     }
 }

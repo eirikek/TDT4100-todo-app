@@ -46,11 +46,8 @@ public class MainController implements Initializable{
     @FXML private Label ageLabel;
     @FXML private Label adressLabel;
 
-    private ObservableList<Contact> contacts = FXCollections.observableArrayList();
+    ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
-    public TableView<Contact> getTableView() {
-        return tableView;
-    }
 
     //Skrive kontaktlisten til fil
     public void writeContactToFile(String filename) throws IOException {
