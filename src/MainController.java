@@ -91,6 +91,10 @@ public class MainController implements Initializable{
         scanner.close();
     }
 
+    public TableView<Contact> getTableView() {
+        return tableView;
+    }
+
     // Åpne skjema for legge til ny kontakt
     public void newBtnClicked(ActionEvent e) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/NewContact.fxml"));
@@ -230,4 +234,6 @@ public class MainController implements Initializable{
             }
         });
     }
+
+ 
 }
