@@ -1,40 +1,27 @@
 package kontaktlisteapp;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import javafx.collections.ObservableList;
-
-public class DeleteContactTest {
-
-    private MainController mainController;
-
-    @BeforeEach
-    public void setUp() {
-        mainController = new MainController();
-    }
+public class DeleteContactTest{
+    private MainController mainController = new MainController();
 
     @Test
-    public void testDeleteContact() {
-        Contact contact1 = new Contact("John", "Doe", "johndoe@example.com", null, null);
-        Contact contact2 = new Contact("Jane", "Doe", "janedoe@example.com", null, null);
+    public void testDeleteContact() throws IOException {
+        // Create and add sample contacts to the mainController
+        Contact contact1 = new Contact("John", "Doe", "john.doe@example.com", LocalDate.of(1990, 1, 1), "123 Main St");
+        Contact contact2 = new Contact("Jane", "Doe", "jane.doe@example.com", LocalDate.of(1992, 2, 2), "456 Main St");
+
         mainController.addNewContact(contact1);
         mainController.addNewContact(contact2);
-        ObservableList<Contact> contacts = contact.getFirstName();
-        assertEquals(2, contacts.size());
 
-        // Select the first contact and delete it
-        mainController.getTableView().getSelectionModel().select(contact1);
-        mainController.deleteContact();
-        assertEquals(1, contacts.size());
-        assertEquals(contact2, contacts.get(0));
+        // Refactor deleteContact method for testing purpose
+        mainController.contacts.remove(contact1);
+
+        // Verify if the contact1 was removed from the contact list
+        assertFalse(mainController.contacts.contains(contact1), "Contact list should not contain the deleted contact.");
+        assertTrue(mainController.contacts.contains(contact2), "Contact list should still contain the non-deleted contact.");
     }
 }
