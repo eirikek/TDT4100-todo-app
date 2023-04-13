@@ -170,7 +170,6 @@ public class MainController implements Initializable{
      //Legge til kontakt
      public void addNewContact(Contact contact) throws IOException {
         contacts.add(contact);
-        //tableView.getSelectionModel().select(contact);
         writeContactToFile("src/main/resources/contacts.txt");
     }
 
