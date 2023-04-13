@@ -16,7 +16,6 @@ import javafx.collections.ObservableList;
 public class DeleteContactTest {
 
     private MainController mainController;
-    private Contact contact;
 
     @BeforeEach
     public void setUp() {

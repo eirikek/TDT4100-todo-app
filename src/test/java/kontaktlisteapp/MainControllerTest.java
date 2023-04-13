@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class MainControllerTest extends NewContactController {
 
     private MainController mainController;
-    private String testFilePath = "src/test/resources/test_contacts.txt";
+    private String testFilePath = "contacts.txt";
 
     @BeforeEach
     public void setUp() {
