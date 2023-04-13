@@ -1,1 +1,2 @@
-Fredrik,Hanstee,nfoisdoj@mfgm.com,2020-04-03,Fdosijdisf
+Ola,Nordmann,Ola.Nordmann@Norge.no,1990-01-01,Samfundet 123
+Kari,Svenske,KariSvenske@Sverige.no,1992-02-02,456 Maple St.

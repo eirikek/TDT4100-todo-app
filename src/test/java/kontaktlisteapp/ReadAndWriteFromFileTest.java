@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class MainControllerTest extends NewContactController {
+public class ReadAndWriteFromFileTest extends NewContactController {
 
     private MainController mainController;
     private String testFilePath = "contacts.txt";
@@ -41,7 +41,18 @@ public class MainControllerTest extends NewContactController {
         mainController.getContactsFromFile(testFilePath);
 
         assertEquals(2, mainController.contacts.size());
-        assertEquals(contact1, mainController.contacts.get(0));
-        assertEquals(contact2, mainController.contacts.get(1));
+
+        assertEquals("Ola", mainController.contacts.get(0).getFirstName());
+        assertEquals("Nordmann", mainController.contacts.get(0).getLastName());
+        assertEquals("Ola.Nordmann@Norge.no", mainController.contacts.get(0).getEmail());
+        assertEquals(LocalDate.of(1990, 1, 1), mainController.contacts.get(0).getBirth());
+        assertEquals("Samfundet 123", mainController.contacts.get(0).getAddress());
+
+        assertEquals("Kari", mainController.contacts.get(1).getFirstName());
+        assertEquals("Svenske", mainController.contacts.get(1).getLastName());
+        assertEquals("KariSvenske@Sverige.no", mainController.contacts.get(1).getEmail());
+        assertEquals(LocalDate.of(1992, 2, 2), mainController.contacts.get(1).getBirth());
+        assertEquals("456 Maple St.", mainController.contacts.get(1).getAddress());
+
     }
 }
