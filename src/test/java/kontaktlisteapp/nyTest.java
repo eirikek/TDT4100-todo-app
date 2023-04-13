@@ -1,41 +1,27 @@
 package kontaktlisteapp;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import org.junit.jupiter.api.BeforeEach;
+import java.io.IOException;
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit5.ApplicationTest;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class nyTest extends ApplicationTest {
-    private nyTest nytest;
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
-        AnchorPane root = loader.load();
-        nytest = loader.getController();
-
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    @BeforeEach
-    public void setUp() {
-        FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(() -> new KontaktlisteApp());
-    }
+public class nyTest{
+    private MainController mainController;
 
     @Test
-    public void testContactListEmptyWhenNoContactsLoaded() {
-        TableView<Contact> tableView = nytest.getTableView();
-        assertEquals(0, tableView.getItems().size(), "Contact list should be empty when no contacts are loaded.");
-    }
+    public void testDeleteContact() throws IOException {
+        // Create and add sample contacts to the mainController
+        Contact contact1 = new Contact("John", "Doe", "john.doe@example.com", LocalDate.of(1990, 1, 1), "123 Main St");
+        Contact contact2 = new Contact("Jane", "Doe", "jane.doe@example.com", LocalDate.of(1992, 2, 2), "456 Main St");
 
-    // Add more test methods for other functionalities here
+        mainController.addNewContact(contact1);
+        mainController.addNewContact(contact2);
+
+        // Refactor deleteContact method for testing purpose
+        mainController.deleteContact(contact1);
+
+        // Verify if the contact1 was removed from the contact list
+        assertFalse(mainController.contacts.contains(contact1), "Contact list should not contain the deleted contact.");
+        assertTrue(mainController.contacts.contains(contact2), "Contact list should still contain the non-deleted contact.");
+    }
 }
