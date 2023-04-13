@@ -1,2 +1,0 @@
-John,Doe,john.doe@example.com,1990-01-01,123 Main St
-Jane,Doe,jane.doe@example.com,1992-02-02,456 Main St
